@@ -1,92 +1,31 @@
-import java.util.Random;
-
 public class TicTacToe {
 
-    static char[][] board = {
-
-            {'X', '-', '-'},
-            {'-', 'O', '-'},
-            {'-', '-', '-'}
-    };
-
-    static char computerSymbol = 'O';
+    static boolean isHumanTurn = true;
+    static boolean gameOver = false;
 
     public static void main(String[] args) {
 
-        printBoard();
+        // Continuous game loop
+        while (!gameOver) {
 
-        computerMove();
+            // Human turn
+            if (isHumanTurn) {
 
-        System.out.println("\nComputer Move:\n");
+                System.out.println("Human Turn");
 
-        printBoard();
-    }
+            } else {
 
-    // Computer generates random valid move
-    static void computerMove() {
-
-        Random random = new Random();
-
-        while (true) {
-
-            // Generate random slot (1-9)
-            int slot = random.nextInt(9) + 1;
-
-            // Convert slot to row & column
-            int row = getRowFromSlot(slot);
-            int col = getColFromSlot(slot);
-
-            // Validate move
-            if (isValidMove(row, col)) {
-
-                // Place move
-                placeMove(row, col, computerSymbol);
-
-                break;
-            }
-        }
-    }
-
-    // Convert slot to row
-    static int getRowFromSlot(int slot) {
-
-        return (slot - 1) / 3;
-    }
-
-    // Convert slot to column
-    static int getColFromSlot(int slot) {
-
-        return (slot - 1) % 3;
-    }
-
-    // Validate move
-    static boolean isValidMove(int row, int col) {
-
-        return board[row][col] == '-';
-    }
-
-    // Place symbol
-    static void placeMove(int row, int col, char symbol) {
-
-        board[row][col] = symbol;
-    }
-
-    // Print board
-    static void printBoard() {
-
-        System.out.println("-------------");
-
-        for (int row = 0; row < 3; row++) {
-
-            System.out.print("| ");
-
-            for (int col = 0; col < 3; col++) {
-
-                System.out.print(board[row][col] + " | ");
+                // Computer turn
+                System.out.println("Computer Turn");
             }
 
-            System.out.println();
-            System.out.println("-------------");
+            // Simulated game ending condition
+            gameOver = true;
+
+            // Switch turns
+            isHumanTurn = !isHumanTurn;
         }
+
+        System.out.println("Game Over");
     }
 }
