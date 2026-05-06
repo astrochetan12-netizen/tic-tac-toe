@@ -1,35 +1,50 @@
 public class TicTacToe {
 
-    static char[][] board = {
-
-            {'-', '-', '-'},
-            {'-', 'X', '-'},
-            {'-', '-', '-'}
-    };
+    static char[][] board = new char[3][3];
 
     public static void main(String[] args) {
 
-        int row = 1;
-        int col = 1;
+        initializeBoard();
 
-        System.out.println(isValidMove(row, col));
+        placeMove(0, 0, 'X');
+
+        printBoard();
     }
 
-    // Validate move
-    static boolean isValidMove(int row, int col) {
+    // Initialize board
+    static void initializeBoard() {
 
-        // Check boundaries
-        if (row < 0 || row > 2 || col < 0 || col > 2) {
+        for (int row = 0; row < 3; row++) {
 
-            return false;
+            for (int col = 0; col < 3; col++) {
+
+                board[row][col] = '-';
+            }
         }
+    }
 
-        // Check if cell is empty
-        if (board[row][col] != '-') {
+    // Place symbol on board
+    static void placeMove(int row, int col, char symbol) {
 
-            return false;
+        board[row][col] = symbol;
+    }
+
+    // Print board
+    static void printBoard() {
+
+        System.out.println("-------------");
+
+        for (int row = 0; row < 3; row++) {
+
+            System.out.print("| ");
+
+            for (int col = 0; col < 3; col++) {
+
+                System.out.print(board[row][col] + " | ");
+            }
+
+            System.out.println();
+            System.out.println("-------------");
         }
-
-        return true;
     }
 }
