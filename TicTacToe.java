@@ -1,25 +1,25 @@
-import java.util.Random;
+import java.util.Scanner;
 
 public class TicTacToe {
 
+    // 3x3 Tic-Tac-Toe board
     static char[][] board = new char[3][3];
 
-    static boolean isHumanTurn;
-    static char humanSymbol;
-    static char computerSymbol;
+    // Global Scanner object
+    static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
 
         initializeBoard();
 
-        tossAndAssignSymbols();
-
-        displayTossResult();
-
         printBoard();
+
+        int slot = getUserSlot();
+
+        System.out.println("Slot entered: " + slot);
     }
 
-    // UC1: Initialize board
+    // UC1: Initialize board with '-'
     static void initializeBoard() {
 
         for (int row = 0; row < 3; row++) {
@@ -31,51 +31,7 @@ public class TicTacToe {
         }
     }
 
-    // UC2: Toss and assign symbols
-    static void tossAndAssignSymbols() {
-
-        Random random = new Random();
-
-        int toss = random.nextInt(2);
-
-        // 0 = Human starts
-        // 1 = Computer starts
-
-        if (toss == 0) {
-
-            isHumanTurn = true;
-
-            humanSymbol = 'X';
-            computerSymbol = 'O';
-
-        } else {
-
-            isHumanTurn = false;
-
-            humanSymbol = 'O';
-            computerSymbol = 'X';
-        }
-    }
-
-    // Display toss result
-    static void displayTossResult() {
-
-        if (isHumanTurn) {
-
-            System.out.println("Human won the toss!");
-
-        } else {
-
-            System.out.println("Computer won the toss!");
-        }
-
-        System.out.println("Human Symbol: " + humanSymbol);
-        System.out.println("Computer Symbol: " + computerSymbol);
-
-        System.out.println();
-    }
-
-    // Print board
+    // UC1: Print board
     static void printBoard() {
 
         System.out.println("-------------");
@@ -92,5 +48,15 @@ public class TicTacToe {
             System.out.println();
             System.out.println("-------------");
         }
+    }
+
+    // UC3: Read slot input from user
+    static int getUserSlot() {
+
+        System.out.print("Enter slot number (1-9): ");
+
+        int slot = scanner.nextInt();
+
+        return slot;
     }
 }
